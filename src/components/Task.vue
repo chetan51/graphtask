@@ -3,10 +3,6 @@
     <span>•</span>
     <input
       v-model="title"
-      @keydown.down.prevent="moveDown"
-      @keydown.up.prevent="moveUp"
-      @keydown.tab.prevent="shiftRight(index, $event)"
-      @keydown.shift.tab.prevent="shiftLeft(index, $event)"
       @keydown.enter.prevent="createSibling()"
       v-focus="index === focused"
       @focus="focused = index"

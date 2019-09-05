@@ -27,28 +27,6 @@ export default {
       return this.$store.state.tasks
     }
   },
-  methods: {
-    moveDown: function() {
-      this.focused = Math.min(this.focused + 1, this.list.length - 1);
-    },
-    moveUp: function () {
-      this.focused = Math.max(this.focused - 1, 0);
-    },
-    shiftLeft: function (index, event) {
-      let self = this;
-      self.list[index].level = Math.max(self.list[index].level - 1, 0);
-    },
-    shiftRight: function (index, event) {
-      if (event.shiftKey)
-        return;
-      if (index === 0) return;
-      this.list[index].level = Math.min(this.list[index].level + 1, this.list[index - 1].level + 1, MAX_LEVEL);
-    },
-    addItem: function (index) {
-      this.list.splice(index + 1, 0, {value: '', level: this.list[index].level});
-      this.focused = index + 1;
-    }
-  },
   components: {
     Task
   }
