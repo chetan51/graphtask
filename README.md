@@ -1,6 +1,6 @@
-# myflowy
+# GraphTask
 
-> A Vue.js project
+> A graph-based task management app.
 
 ## Build Setup
 
