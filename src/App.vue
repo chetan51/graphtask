@@ -2,10 +2,10 @@
   <div id="app">
     <ul>
       <task
-        v-for="(item, index) in list"
+        v-for="item in list"
         v-bind:key="item"
         v-bind:title="item.value"
-        v-bind:level="item.level"
+        v-bind:level="0"
         v-bind:children="item.children"
       ></task>
     </ul>
@@ -43,7 +43,8 @@ Vue.component('task', {
             v-for="(item, index) in children"
             v-bind:key="item"
             v-bind:title="item.value"
-            v-bind:level="item.level"
+            v-bind:level="level + 1"
+            v-bind:children="item.children"
           ></task>
         </ul>
       </li>
@@ -57,26 +58,29 @@ export default {
     return {
       list: [
         {
-          value: 'The first line',
-          level: 0,
+          value: 'A',
           children: [
             {
-              value: 'The first subline',
-              level: 1
+              value: 'A1',
+              children: [
+                {
+                  value: 'A1a'
+                },
+                {
+                  value: 'A1b'
+                }
+              ]
             },
             {
-              value: 'The second subline',
-              level: 1
+              value: 'A2',
             }
           ]
         },
         {
-          value: 'The second line',
-          level: 1
+          value: 'B',
         },
         {
-          value: 'The third line',
-          level: 2
+          value: 'C',
         }
       ],
       focused: null
