@@ -2,11 +2,10 @@
   <div id="app">
     <ul>
       <task
-        v-for="item in list"
+        v-for="item in tasks"
         v-bind:key="item"
-        v-bind:title="item.value"
+        v-bind:item="item"
         v-bind:level="0"
-        v-bind:children="item.children"
       ></task>
     </ul>
   </div>
@@ -19,10 +18,19 @@ import Vue from 'vue';
 const MAX_LEVEL = 10;
 
 Vue.component('task', {
-  props: ["title", "level", "children"],
+  props: ["item", "level"],
   computed: {
     levelClass () {
       return "level" + this.level
+    },
+    task () {
+      return this.$store.state.graph[this.item.id]
+    },
+    title () {
+      return this.task.value
+    },
+    children () {
+      return this.task.children
     }
   },
   template: `
@@ -40,11 +48,10 @@ Vue.component('task', {
           @blur="focused = null">
         <ul>
           <task
-            v-for="(item, index) in children"
+            v-for="item in children"
             v-bind:key="item"
-            v-bind:title="item.value"
+            v-bind:item="item"
             v-bind:level="level + 1"
-            v-bind:children="item.children"
           ></task>
         </ul>
       </li>
@@ -54,36 +61,9 @@ Vue.component('task', {
 export default {
   name: 'app',
   directives: { focus: focus },
-  data () {
-    return {
-      list: [
-        {
-          value: 'A',
-          children: [
-            {
-              value: 'A1',
-              children: [
-                {
-                  value: 'A1a'
-                },
-                {
-                  value: 'A1b'
-                }
-              ]
-            },
-            {
-              value: 'A2',
-            }
-          ]
-        },
-        {
-          value: 'B',
-        },
-        {
-          value: 'C',
-        }
-      ],
-      focused: null
+  computed: {
+    tasks () {
+      return this.$store.state.tasks
     }
   },
   methods: {
