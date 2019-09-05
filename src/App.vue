@@ -67,10 +67,6 @@ $maxLevel: 10;
   margin-left: 100px;
 }
 
-h1, h2 {
-  font-weight: normal;
-}
-
 ul {
   padding: 0;
   list-style-type: none;
