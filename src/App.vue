@@ -1,21 +1,13 @@
 <template>
   <div id="app">
-    <span>{{ msg }}</span>
     <ul>
-      <li v-for="(item, index) in list" 
-          v-bind:class="`level${list[index].level}`">
-        <span>•</span>
-        <input
-          v-model="list[index].value"
-          @keydown.down.prevent="moveDown"
-          @keydown.up.prevent="moveUp"
-          @keydown.tab.prevent="shiftRight(index, $event)"
-          @keydown.shift.tab.prevent="shiftLeft(index, $event)"
-          @keydown.enter.prevent="addItem(index)"
-          v-focus="index === focused"
-          @focus="focused = index"
-          @blur="focused = null">
-      </li>
+      <task
+        v-for="(item, index) in list"
+        v-bind:key="item"
+        v-bind:title="item.value"
+        v-bind:level="item.level"
+        v-bind:children="item.children"
+      ></task>
     </ul>
   </div>
 </template>
@@ -26,16 +18,66 @@ import Vue from 'vue';
 
 const MAX_LEVEL = 10;
 
+Vue.component('task', {
+  props: ["title", "level", "children"],
+  computed: {
+    levelClass () {
+      return "level" + this.level
+    }
+  },
+  template: `
+      <li v-bind:class="levelClass">
+        <span>•</span>
+        <input
+          v-model="title"
+          @keydown.down.prevent="moveDown"
+          @keydown.up.prevent="moveUp"
+          @keydown.tab.prevent="shiftRight(index, $event)"
+          @keydown.shift.tab.prevent="shiftLeft(index, $event)"
+          @keydown.enter.prevent="addItem(index)"
+          v-focus="index === focused"
+          @focus="focused = index"
+          @blur="focused = null">
+        <ul>
+          <task
+            v-for="(item, index) in children"
+            v-bind:key="item"
+            v-bind:title="item.value"
+            v-bind:level="item.level"
+          ></task>
+        </ul>
+      </li>
+  `
+})
+
 export default {
   name: 'app',
   directives: { focus: focus },
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App',
       list: [
-        {value: 'The first line', level: 0},
-        {value: 'The second line', level: 1},
-        {value: 'The third line', level: 2}
+        {
+          value: 'The first line',
+          level: 0,
+          children: [
+            {
+              value: 'The first subline',
+              level: 1
+            },
+            {
+              value: 'The second subline',
+              level: 1
+            }
+          ]
+        },
+        {
+          value: 'The second line',
+          level: 1
+        },
+        {
+          value: 'The third line',
+          level: 2
+        }
       ],
       focused: null
     }
