@@ -26,8 +26,13 @@ Vue.component('task', {
     task () {
       return this.$store.state.graph[this.item.id]
     },
-    title () {
-      return this.task.value
+    title: {
+      get () {
+        return this.task.value
+      },
+      set (value) {
+        this.task.value = value
+      }
     },
     children () {
       return this.task.children
