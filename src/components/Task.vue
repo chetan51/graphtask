@@ -61,9 +61,11 @@ export default {
       }
 
       if (this.parentItem) {
+        // TODO: Insert task underneath current one, instead of at the end
         this.$store.state["graph"][this.parentItem.id].children.push(newItem)
       }
       else {
+        // TODO: Insert task underneath current one, instead of at the end
         this.$store.state["tasks"].push(newItem)
       }
     }

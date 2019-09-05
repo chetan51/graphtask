@@ -2,6 +2,26 @@
 
 > A graph-based task management app.
 
+## Usage
+
+### Editing a task's title
+
+Put your cursor on a task and start editing.
+
+### Creating a new sibling task
+
+Put your cursor on a task and press ENTER.
+
+> TODO: Focus cursor on newly-created task.
+
+### TODO: Creating a new child task
+
+#### TODO: Referencing an existing task
+
+### TODO: Copying the link to a task
+
+### TODO: Deleting a task
+
 ## Build Setup
 
 ``` bash
