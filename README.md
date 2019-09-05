@@ -1,6 +1,8 @@
 # GraphTask
 
-> A graph-based task management app.
+A graph-based task management app.
+
+> (Forked from https://github.com/9diov/myflowy)
 
 ## Usage
 
@@ -21,6 +23,8 @@ Put your cursor on a task and press ENTER.
 ### TODO: Copying the link to a task
 
 ### TODO: Deleting a task
+
+### TODO: Navigating between tasks using arrow keys
 
 ## Build Setup
 
